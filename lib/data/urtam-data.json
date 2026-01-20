@@ -1,0 +1,115 @@
+{
+  "company": {
+    "name": "URTAM Formation",
+    "brandColor": "#22c9b0",
+    "lastUpdated": "2024-12-18"
+  },
+  "socialMedia": {
+    "platforms": [
+      {
+        "id": "linkedin",
+        "name": "LinkedIn",
+        "followers": 852,
+        "engagement": 5.2,
+        "posts": 15,
+        "color": "#0A66C2",
+        "account": "Stéphane MICHEL",
+        "bestContent": "Vidéo Champ Champs-Élysées",
+        "format": "Post texte + photo"
+      },
+      {
+        "id": "instagram",
+        "name": "Instagram",
+        "followers": 74,
+        "engagement": 0,
+        "posts": 10,
+        "color": "#E4405F",
+        "account": "urtamformation",
+        "bestContent": null,
+        "format": "Vidéo + photo"
+      },
+      {
+        "id": "facebook",
+        "name": "Facebook",
+        "followers": 1,
+        "engagement": 0,
+        "posts": 57,
+        "color": "#1877F2",
+        "account": "Stéphane Michel",
+        "bestContent": null,
+        "format": "Post texte + photo"
+      },
+      {
+        "id": "youtube",
+        "name": "YouTube",
+        "followers": 4,
+        "engagement": 0,
+        "posts": 4,
+        "color": "#FF0000",
+        "account": "urtamformation5140",
+        "bestContent": "Vidéo EXPERIENCE URTAM FORMATION",
+        "format": "Vidéo"
+      },
+      {
+        "id": "twitter",
+        "name": "Twitter",
+        "followers": 1,
+        "engagement": 0,
+        "posts": 0,
+        "color": "#1DA1F2",
+        "account": "UrtamF",
+        "bestContent": null,
+        "format": null
+      }
+    ],
+    "totalFollowers": 932,
+    "averageEngagement": 1.04
+  },
+  "metrics": {
+    "strengths": [
+      {
+        "name": "Engagement LinkedIn",
+        "value": "5.2%",
+        "description": "Taux d'engagement supérieur à la moyenne du secteur"
+      },
+      {
+        "name": "Avis positifs",
+        "value": "100%",
+        "description": "2 avis positifs sur le site web"
+      },
+      {
+        "name": "Expertise reconnue",
+        "value": "Formateurs adaptables",
+        "description": "Retours clients soulignent l'adaptabilité et la qualité"
+      }
+    ],
+    "weaknesses": [
+      {
+        "name": "Présence réseaux sociaux",
+        "severity": "high",
+        "description": "Faible nombre de followers comparé aux concurrents (-75% vs leader)"
+      },
+      {
+        "name": "Avis Google",
+        "severity": "critical",
+        "description": "0 avis Google - Impact négatif sur la crédibilité en ligne"
+      },
+      {
+        "name": "Activité Facebook/Twitter",
+        "severity": "medium",
+        "description": "Présence quasi-inexistante malgré 57 posts sur Facebook"
+      }
+    ]
+  },
+  "kpis": {
+    "totalFollowers": 932,
+    "engagementRate": 5.2,
+    "totalPosts": 86,
+    "avisGoogle": 0
+  },
+  "formation": {
+    "personnesFormees": 1017,
+    "tauxSatisfaction": 95,
+    "heuresFormation": 7917
+  }
+}

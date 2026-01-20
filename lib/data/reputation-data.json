@@ -1,0 +1,67 @@
+{
+  "reviews": {
+    "website": [
+      {
+        "id": 1,
+        "platform": "Site web",
+        "comment": "Génial! Que du concret, on ressort avec de vraies solutions.",
+        "sentiment": "positive",
+        "rating": 5,
+        "date": null,
+        "author": null
+      },
+      {
+        "id": 2,
+        "platform": "Site web",
+        "comment": "Formation très enrichissante et super formateur qui s'est adapté à chacun et nous donne envie de réussir.",
+        "sentiment": "positive",
+        "rating": 5,
+        "date": null,
+        "author": null
+      }
+    ],
+    "google": [],
+    "facebook": [],
+    "linkedin": []
+  },
+  "statistics": {
+    "total": 2,
+    "positive": 2,
+    "neutral": 0,
+    "negative": 0,
+    "averageRating": 5.0,
+    "googleReviewsCount": 0,
+    "websiteReviewsCount": 2
+  },
+  "themes": [
+    {
+      "theme": "Contenu pratique",
+      "count": 2,
+      "sentiment": "positive"
+    },
+    {
+      "theme": "Adaptabilité du formateur",
+      "count": 1,
+      "sentiment": "positive"
+    },
+    {
+      "theme": "Motivation",
+      "count": 1,
+      "sentiment": "positive"
+    }
+  ],
+  "alerts": [
+    {
+      "type": "critical",
+      "message": "0 avis Google",
+      "impact": "Manque de crédibilité en ligne - Les clients recherchent les avis Google avant de choisir une formation",
+      "action": "Mettre en place une stratégie de collecte d'avis Google après chaque formation"
+    },
+    {
+      "type": "warning",
+      "message": "Seulement 2 avis au total",
+      "impact": "Volume d'avis insuffisant pour rassurer les prospects",
+      "action": "Solliciter systématiquement les retours clients après les formations"
+    }
+  ]
+}

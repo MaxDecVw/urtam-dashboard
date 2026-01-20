@@ -1,0 +1,92 @@
+{
+  "pages": [
+    {
+      "id": 1,
+      "name": "Accueil",
+      "url": "/",
+      "type": "Landing",
+      "importance": 5,
+      "intention": "Conversion",
+      "performance": 85,
+      "description": "Page d'accueil principale - Première impression"
+    },
+    {
+      "id": 2,
+      "name": "Nos formations",
+      "url": "/formations",
+      "type": "Catalogue",
+      "importance": 4,
+      "intention": "Achat",
+      "performance": 78,
+      "description": "Catalogue des formations disponibles"
+    },
+    {
+      "id": 3,
+      "name": "L'expérience",
+      "url": "/experience",
+      "type": "À propos",
+      "importance": 4,
+      "intention": "Différentiation",
+      "performance": 72,
+      "description": "Présentation de l'approche pédagogique unique"
+    },
+    {
+      "id": 4,
+      "name": "Contact",
+      "url": "/contact",
+      "type": "Contact",
+      "importance": 3,
+      "intention": "Conversion",
+      "performance": 90,
+      "description": "Formulaire de contact et informations"
+    },
+    {
+      "id": 5,
+      "name": "Mentions légales",
+      "url": "/mentions-legales",
+      "type": "Légal",
+      "importance": 3,
+      "intention": "Conformité",
+      "performance": 65,
+      "description": "Informations légales obligatoires"
+    }
+  ],
+  "seoMetrics": {
+    "averagePerformance": 78,
+    "totalPages": 5,
+    "highImportancePages": 3,
+    "conversionPages": 2,
+    "googleRanking": 10,
+    "competitorRankings": {
+      "decalez": 1,
+      "impro2": 7,
+      "arthemon": 2
+    }
+  },
+  "opportunities": [
+    {
+      "priority": "high",
+      "page": "Accueil",
+      "action": "Optimiser pour les mots-clés cibles liés à l'improvisation et au management",
+      "impact": "Amélioration du ranking Google"
+    },
+    {
+      "priority": "high",
+      "page": "Nos formations",
+      "action": "Ajouter des témoignages clients et des avis pour renforcer la crédibilité",
+      "impact": "Augmentation du taux de conversion"
+    },
+    {
+      "priority": "medium",
+      "page": "L'expérience",
+      "action": "Créer du contenu vidéo pour expliquer la méthodologie unique",
+      "impact": "Meilleure différenciation vs concurrents"
+    },
+    {
+      "priority": "critical",
+      "page": "Toutes",
+      "action": "Améliorer le SEO global - Position #10 vs #1 pour Décalez !",
+      "impact": "Visibilité organique et génération de leads"
+    }
+  ]
+}

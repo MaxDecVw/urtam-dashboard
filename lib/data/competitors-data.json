@@ -1,0 +1,74 @@
+{
+  "competitors": [
+    {
+      "id": "decalez",
+      "name": "Décalez !",
+      "totalFollowers": 3772,
+      "googleRanking": 1,
+      "website": "https://www.decalez.fr/",
+      "platforms": {
+        "linkedin": 1818,
+        "facebook": 1300,
+        "instagram": 480,
+        "twitter": 174,
+        "youtube": 0
+      },
+      "offre": "Théâtre d'entreprise premium",
+      "strengths": "Très actif sur les réseaux sociaux, présence digitale forte",
+      "weaknesses": "-",
+      "marketShare": 59.4,
+      "color": "#8b5cf6"
+    },
+    {
+      "id": "impro2",
+      "name": "ImprO2",
+      "totalFollowers": 1914,
+      "googleRanking": 7,
+      "website": "https://impro2.fr/",
+      "platforms": {
+        "linkedin": 1114,
+        "facebook": 800,
+        "instagram": 0,
+        "twitter": 0,
+        "youtube": 0
+      },
+      "offre": "Improtraining - Formations complètes",
+      "strengths": "Offres de formation complètes et détaillées",
+      "weaknesses": "Peu actif sur les réseaux sociaux",
+      "marketShare": 30.1,
+      "color": "#f97316"
+    },
+    {
+      "id": "arthemon",
+      "name": "Arthémon",
+      "totalFollowers": 666,
+      "googleRanking": 2,
+      "website": "https://arthemon.com/",
+      "platforms": {
+        "linkedin": 666,
+        "facebook": 0,
+        "instagram": 0,
+        "twitter": 0,
+        "youtube": 0
+      },
+      "offre": "Show business corporate",
+      "strengths": "Valorisation client par avis et vidéos témoignages",
+      "weaknesses": "Aucun post sur LinkedIn",
+      "marketShare": 10.5,
+      "color": "#ec4899"
+    }
+  ],
+  "marketAnalysis": {
+    "totalMarketFollowers": 6352,
+    "urtamFollowers": 932,
+    "urtamShare": 14.7,
+    "leaderName": "Décalez !",
+    "leaderShare": 59.4,
+    "averageFollowers": 2129,
+    "gap": {
+      "vsLeader": -2840,
+      "vsAverage": -1197,
+      "percentageVsLeader": -75.3
+    }
+  }
+}

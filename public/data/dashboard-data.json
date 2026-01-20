@@ -1,0 +1,26 @@
+{
+  "urtam": {
+    "linkedinFollowers": 11,
+    "linkedinPosts": 0,
+    "engagementRate": 0
+  },
+  "stephaneMichel": {
+    "linkedinFollowers": 852
+  },
+  "leader": {
+    "name": "Décalez",
+    "linkedinFollowers": 1818
+  },
+  "objectifs": {
+    "followersM6": 400,
+    "postsParMois": 8,
+    "engagementCible": 3,
+    "contactsUrtam": 50
+  },
+  "suiviMensuel": {
+    "mois": ["Mois 1", "Mois 2", "Mois 3", "Mois 4", "Mois 5", "Mois 6"],
+    "abonnes": [11, null, null, null, null, null],
+    "posts": [0, null, null, null, null, null],
+    "engagement": [0, null, null, null, null, null]
+  }
+}

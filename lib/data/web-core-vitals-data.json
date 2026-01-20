@@ -1,0 +1,113 @@
+{
+  "metrics": [
+    {
+      "id": "fcp",
+      "name": "First Contentful Paint (FCP)",
+      "description": "Temps avant l'affichage du premier élément de contenu",
+      "mobile": {
+        "value": 3.0,
+        "unit": "s",
+        "rating": "poor"
+      },
+      "desktop": {
+        "value": 0.7,
+        "unit": "s",
+        "rating": "good"
+      },
+      "thresholds": {
+        "good": 1.8,
+        "needsImprovement": 3.0
+      }
+    },
+    {
+      "id": "lcp",
+      "name": "Largest Contentful Paint (LCP)",
+      "description": "Temps de chargement du plus grand élément visible",
+      "mobile": {
+        "value": 4.8,
+        "unit": "s",
+        "rating": "poor"
+      },
+      "desktop": {
+        "value": 1.5,
+        "unit": "s",
+        "rating": "good"
+      },
+      "thresholds": {
+        "good": 2.5,
+        "needsImprovement": 4.0
+      }
+    },
+    {
+      "id": "tbt",
+      "name": "Total Blocking Time (TBT)",
+      "description": "Temps total où la page est bloquée et non-interactive",
+      "mobile": {
+        "value": 0,
+        "unit": "ms",
+        "rating": "good"
+      },
+      "desktop": {
+        "value": 0,
+        "unit": "ms",
+        "rating": "good"
+      },
+      "thresholds": {
+        "good": 200,
+        "needsImprovement": 600
+      }
+    },
+    {
+      "id": "cls",
+      "name": "Cumulative Layout Shift (CLS)",
+      "description": "Stabilité visuelle - mouvement inattendu des éléments",
+      "mobile": {
+        "value": 0.01,
+        "unit": "",
+        "rating": "good"
+      },
+      "desktop": {
+        "value": 0.011,
+        "unit": "",
+        "rating": "good"
+      },
+      "thresholds": {
+        "good": 0.1,
+        "needsImprovement": 0.25
+      }
+    },
+    {
+      "id": "si",
+      "name": "Speed Index",
+      "description": "Vitesse à laquelle le contenu est affiché visuellement",
+      "mobile": {
+        "value": 5.1,
+        "unit": "s",
+        "rating": "poor"
+      },
+      "desktop": {
+        "value": 2.0,
+        "unit": "s",
+        "rating": "needs-improvement"
+      },
+      "thresholds": {
+        "good": 3.4,
+        "needsImprovement": 5.8
+      }
+    }
+  ],
+  "summary": {
+    "mobile": {
+      "good": 2,
+      "needsImprovement": 0,
+      "poor": 3,
+      "score": 40
+    },
+    "desktop": {
+      "good": 4,
+      "needsImprovement": 1,
+      "poor": 0,
+      "score": 85
+    }
+  }
+}
