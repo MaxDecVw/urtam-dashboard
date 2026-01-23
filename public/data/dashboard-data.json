@@ -15,7 +15,7 @@
     "followersM6": 400,
     "postsParMois": 8,
     "engagementCible": 3,
-    "contactsUrtam": 50
+    "contactsUrtam": 30
   },
   "suiviMensuel": {
     "mois": ["Mois 1", "Mois 2", "Mois 3", "Mois 4", "Mois 5", "Mois 6"],
