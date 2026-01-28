@@ -362,43 +362,19 @@ export default function HomePage() {
             Insights
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Card 1 : Progression vers l'objectif */}
+          <div className="flex flex-col gap-4">
+            {/* Card 1 */}
             <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-              <h3 className="text-lg font-semibold mb-4" style={{ color: '#333333' }}>Progression vers l'objectif</h3>
-              <div className="flex items-end justify-between mb-3">
-                <p className="text-4xl font-bold" style={{ color: '#2E5A8B' }}>11</p>
-                <p className="text-lg mb-1" style={{ color: '#888888' }}>/ 400 abonnés</p>
-              </div>
-              <div className="w-full h-4 rounded-full" style={{ backgroundColor: '#E0E0E0' }}>
-                <div className="h-4 rounded-full" style={{ width: '3%', backgroundColor: '#5B9BD5' }}></div>
-              </div>
-              <p className="text-sm mt-2" style={{ color: '#888888' }}>3% de l'objectif atteint</p>
+              <p className="text-base" style={{ color: '#333333', lineHeight: '1.6' }}>
+                La communication repose exclusivement sur Stéphane Michel, ce qui limite l'identification d'Urtam comme une marque autonome.
+              </p>
             </div>
 
-            {/* Card 2 : Qui publie ? */}
+            {/* Card 2 */}
             <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-              <h3 className="text-lg font-semibold mb-4" style={{ color: '#333333' }}>Qui publie ?</h3>
-              <div className="space-y-4">
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-base font-medium" style={{ color: '#333333' }}>Stéphane</p>
-                    <p className="text-base font-bold" style={{ color: '#2E5A8B' }}>100%</p>
-                  </div>
-                  <div className="w-full h-3 rounded-full" style={{ backgroundColor: '#E0E0E0' }}>
-                    <div className="h-3 rounded-full" style={{ width: '100%', backgroundColor: '#5B9BD5' }}></div>
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-base font-medium" style={{ color: '#333333' }}>Urtam</p>
-                    <p className="text-base font-bold" style={{ color: '#2E5A8B' }}>0%</p>
-                  </div>
-                  <div className="w-full h-3 rounded-full" style={{ backgroundColor: '#E0E0E0' }}>
-                    <div className="h-3 rounded-full" style={{ width: '0%', backgroundColor: '#5B9BD5' }}></div>
-                  </div>
-                </div>
-              </div>
+              <p className="text-base" style={{ color: '#333333', lineHeight: '1.6' }}>
+                L'audience existante sur la page LinkedIn de Stéphane Michel constitue un levier immédiat pour la notoriété d'Urtam.
+              </p>
             </div>
           </div>
         </section>
