@@ -115,7 +115,7 @@ export default function HomePage() {
           <h2 className="text-2xl font-bold mb-4" style={{ color: '#333333' }}>
             Situation actuelle
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
 
             <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
               <p className="text-sm mb-1" style={{ color: '#888888' }}>Abonnés LinkedIn Urtam</p>
@@ -125,11 +125,6 @@ export default function HomePage() {
             <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
               <p className="text-sm mb-1" style={{ color: '#888888' }}>Abonnés LinkedIn Stéphane Michel</p>
               <p className="text-4xl font-bold" style={{ color: '#2E5A8B' }}><CountUp end={data.stephaneMichel.linkedinFollowers} /></p>
-            </div>
-
-            <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-              <p className="text-sm mb-1" style={{ color: '#888888' }}>Objectif abonnés</p>
-              <p className="text-4xl font-bold" style={{ color: '#2E5A8B' }}><CountUp end={400} /></p>
             </div>
 
             <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
