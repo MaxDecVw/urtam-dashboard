@@ -126,7 +126,7 @@ export default function ResultatsPage() {
                   </tr>
                   <tr>
                     <td className="px-6 py-4 whitespace-nowrap text-base font-medium" style={{ color: '#333333' }}>
-                      Taux d'engagement Urtam
+                      Taux d'engagement
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-center text-2xl font-bold" style={{ color: '#2E5A8B' }}>
                       4%
