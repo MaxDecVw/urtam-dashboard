@@ -89,6 +89,63 @@ export default function ResultatsPage() {
           </div>
         </section>
 
+        {/* SECTION : Evolution des KPIs */}
+        <section>
+          <h2 className="text-2xl font-bold mb-4" style={{ color: '#333333' }}>
+            Evolution des KPIs
+          </h2>
+          <div className="bg-white overflow-hidden" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
+            <div className="overflow-x-auto">
+              <table className="min-w-full">
+                <thead style={{ backgroundColor: '#F5F5F5' }}>
+                  <tr>
+                    <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style={{ color: '#888888' }}>
+                      KPI
+                    </th>
+                    <th className="px-6 py-3 text-center text-sm font-medium uppercase tracking-wider" style={{ color: '#888888' }}>
+                      Résultats obtenus
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y" style={{ borderColor: '#E0E0E0' }}>
+                  <tr>
+                    <td className="px-6 py-4 whitespace-nowrap text-base font-medium" style={{ color: '#333333' }}>
+                      Abonnés LinkedIn Urtam
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center text-2xl font-bold" style={{ color: '#2E5A8B' }}>
+                      387
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 whitespace-nowrap text-base font-medium" style={{ color: '#333333' }}>
+                      Posts Urtam / mois
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center text-2xl font-bold" style={{ color: '#2E5A8B' }}>
+                      2-9
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 whitespace-nowrap text-base font-medium" style={{ color: '#333333' }}>
+                      Taux d'engagement Urtam
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center text-2xl font-bold" style={{ color: '#2E5A8B' }}>
+                      4%
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 whitespace-nowrap text-base font-medium" style={{ color: '#333333' }}>
+                      Demandes mentionnant Urtam
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center text-2xl font-bold" style={{ color: '#2E5A8B' }}>
+                      20%
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
         {/* SECTION 2 : Graphiques d'évolution */}
         <section>
           <h2 className="text-2xl font-bold mb-4" style={{ color: '#333333' }}>
