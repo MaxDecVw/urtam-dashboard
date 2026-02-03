@@ -310,7 +310,7 @@ export default function ResultatsPage() {
             {/* Card 2 */}
             <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
               <p className="text-base" style={{ color: '#333333', lineHeight: '1.6' }}>
-                Un taux d'engagement stable prouve que l'audience suit Urtam, pas seulement Stéphane.
+                Le taux d'engagement autour des 4% montre que l'audience suit Urtam, pas seulement Stéphane Michel.
               </p>
             </div>
           </div>
