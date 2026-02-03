@@ -119,22 +119,22 @@ export default function HomePage() {
 
             <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
               <p className="text-sm mb-1" style={{ color: '#888888' }}>Abonnés LinkedIn Urtam</p>
-              <p className="text-4xl font-bold" style={{ color: '#2E5A8B' }}><CountUp end={data.urtam.linkedinFollowers} /></p>
+              <p className="text-3xl font-bold" style={{ color: '#2E5A8B' }}><CountUp end={data.urtam.linkedinFollowers} /></p>
             </div>
 
             <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
               <p className="text-sm mb-1" style={{ color: '#888888' }}>Abonnés LinkedIn Stéphane Michel</p>
-              <p className="text-4xl font-bold" style={{ color: '#2E5A8B' }}><CountUp end={data.stephaneMichel.linkedinFollowers} /></p>
+              <p className="text-3xl font-bold" style={{ color: '#2E5A8B' }}><CountUp end={data.stephaneMichel.linkedinFollowers} /></p>
             </div>
 
             <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-              <p className="text-sm mb-1" style={{ color: '#888888' }}>Date du dernier post</p>
-              <p className="text-4xl font-bold" style={{ color: '#2E5A8B' }}>07/01/2025</p>
+              <p className="text-sm mb-1" style={{ color: '#888888' }}>Date du dernier post Stéphane Michel</p>
+              <p className="text-3xl font-bold" style={{ color: '#2E5A8B' }}>07/01/2025</p>
             </div>
 
             <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
               <p className="text-sm mb-1" style={{ color: '#888888' }}>Témoignages clients</p>
-              <p className="text-4xl font-bold" style={{ color: '#2E5A8B' }}><CountUp end={2} /></p>
+              <p className="text-3xl font-bold" style={{ color: '#2E5A8B' }}><CountUp end={2} /></p>
             </div>
 
           </div>
