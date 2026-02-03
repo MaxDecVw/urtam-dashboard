@@ -72,7 +72,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div>
             <h1 className="text-4xl font-bold" style={{ color: '#2E5A8B' }}>
-              Tableau de bord - Construction de marque Urtam
+              Tableau de bord - Urtam Formation
             </h1>
             <p className="mt-1 text-base" style={{ color: '#888888' }}>
               Version 1.0
