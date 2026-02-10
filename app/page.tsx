@@ -74,9 +74,6 @@ export default function HomePage() {
             <h1 className="text-4xl font-bold" style={{ color: '#2E5A8B' }}>
               Tableau de bord - Urtam Formation
             </h1>
-            <p className="mt-1 text-base" style={{ color: '#888888' }}>
-              Version 1.0
-            </p>
           </div>
         </div>
       </header>
