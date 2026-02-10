@@ -105,7 +105,7 @@ export default function HomePage() {
 
         {/* Objectif stratégique - Card */}
         <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-          <p className="text-xl font-bold" style={{ color: '#2E5A8B' }}>
+          <p className="text-xl font-bold" style={{ color: '#333333' }}>
             Objectif 2026 : Faire connaître Urtam indépendamment de Stéphane Michel
           </p>
         </div>
