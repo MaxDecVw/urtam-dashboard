@@ -8,7 +8,7 @@ export default function ResultatsPage() {
   // Données de simulation pour 6 mois
   const simulationData = {
     mois: ['Mois 1', 'Mois 2', 'Mois 3', 'Mois 4', 'Mois 5', 'Mois 6'],
-    abonnes: [11, 35, 78, 142, 245, 387],
+    abonnes: [11, 35, 78, 142, 245, 400],
     posts: [2, 4, 6, 8, 7, 9],
     engagement: [1.2, 5.2, 4.8, 4.3, 3.9, 4.8]
   };
@@ -68,7 +68,7 @@ export default function ResultatsPage() {
 
             <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
               <p className="text-sm mb-1" style={{ color: '#888888' }}>Abonnés Urtam</p>
-              <p className="text-4xl font-bold" style={{ color: '#2E5A8B' }}><CountUp end={387} /></p>
+              <p className="text-4xl font-bold" style={{ color: '#2E5A8B' }}><CountUp end={400} /></p>
             </div>
 
             <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
@@ -113,7 +113,7 @@ export default function ResultatsPage() {
                       Abonnés LinkedIn Urtam
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-center text-2xl font-bold" style={{ color: '#2E5A8B' }}>
-                      387
+                      400
                     </td>
                   </tr>
                   <tr>
