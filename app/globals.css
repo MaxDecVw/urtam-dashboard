@@ -1,22 +1,13 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --primary: 166 81 69;
-    --primary-dark: 155 70 59;
-    --primary-light: 191 100 76;
-  }
-
   body {
-    @apply bg-gray-50 text-gray-900;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+    @apply text-gray-900 antialiased;
+    background-color: #F5F5F5;
+    font-family: 'Satoshi', sans-serif;
   }
 }

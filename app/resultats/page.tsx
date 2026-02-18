@@ -1,322 +1,290 @@
 'use client';
 
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import CountUp from '@/components/CountUp';
+import ShareMenu from '@/components/ShareMenu';
+
+interface ProjectionsData {
+  resume: {
+    abonnes: number;
+    posts: number;
+    engagement: number;
+    objectifAbonnes: number;
+  };
+  kpiResultats: { kpi: string; valeur: string }[];
+  simulationMensuelle: {
+    mois: string[];
+    abonnes: number[];
+    posts: number[];
+    engagement: number[];
+  };
+  insights: string[];
+}
 
 export default function ResultatsPage() {
-  // Données de simulation pour 6 mois
-  const simulationData = {
-    mois: ['Mois 1', 'Mois 2', 'Mois 3', 'Mois 4', 'Mois 5', 'Mois 6'],
-    abonnes: [11, 35, 78, 142, 245, 400],
-    posts: [2, 4, 6, 8, 7, 9],
-    engagement: [1.2, 5.2, 4.8, 4.3, 3.9, 4.8]
-  };
+  const [data, setData] = useState<ProjectionsData | null>(null);
+  const dashboardRef = useRef<HTMLDivElement>(null);
 
-  // Préparer les données pour les graphiques
-  const chartDataFollowers = simulationData.mois.map((mois, index) => ({
+  useEffect(() => {
+    fetch('/data/dashboard-data.json')
+      .then(res => res.json())
+      .then(json => setData(json.projections))
+      .catch(err => console.error('Erreur chargement données:', err));
+  }, []);
+
+  if (!data) {
+    return (
+      <div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: '#F5F5F5' }}>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-2 border-gray-300 mx-auto" style={{ borderTopColor: '#032b77' }}></div>
+          <p className="mt-4 text-sm text-gray-500">Chargement des données...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const chartDataFollowers = data.simulationMensuelle.mois.map((mois, index) => ({
     mois,
-    abonnes: simulationData.abonnes[index]
+    abonnes: data.simulationMensuelle.abonnes[index]
   }));
 
-  const chartDataEngagement = simulationData.mois.map((mois, index) => ({
+  const chartDataEngagement = data.simulationMensuelle.mois.map((mois, index) => ({
     mois,
-    engagement: simulationData.engagement[index]
+    engagement: data.simulationMensuelle.engagement[index]
   }));
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F5F5F5' }}>
+    <div ref={dashboardRef} className="min-h-screen" style={{ backgroundColor: '#F5F5F5' }}>
       {/* Header */}
-      <header className="bg-white" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div>
-            <h1 className="text-4xl font-bold" style={{ color: '#2E5A8B' }}>
-              Simulation - Résultats 6 mois
-            </h1>
-          </div>
+      <header className="bg-white shadow-md">
+        <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
+          <h1 className="text-3xl font-semibold tracking-tight" style={{ color: '#032b77' }}>
+            Simulation <span className="font-light text-gray-300 mx-1">|</span> Résultats 6 mois
+          </h1>
+          <ShareMenu targetRef={dashboardRef} filePrefix="urtam-projections" pageTitle="Simulation - Projections 2026" />
         </div>
       </header>
 
       {/* Navigation */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-        <div className="flex gap-4">
+      <div className="max-w-6xl mx-auto px-6 pt-8">
+        <div className="flex gap-3">
           <Link
             href="/"
-            className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-            style={{ backgroundColor: '#F5F5F5', color: '#333333', border: '1px solid #E0E0E0' }}
+            className="px-6 py-2.5 rounded-full text-sm font-medium border-2 border-gray-200 text-gray-400 hover:border-gray-300 hover:text-gray-500 transition-colors"
           >
             Objectifs 2026
           </Link>
           <Link
             href="/resultats"
-            className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-            style={{ backgroundColor: '#5B9BD5', color: '#FFFFFF' }}
+            className="px-6 py-2.5 rounded-full text-sm font-medium border-2 transition-colors"
+            style={{ borderColor: '#032b77', color: '#032b77', backgroundColor: 'transparent' }}
           >
             Projections 2026
           </Link>
         </div>
       </div>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      <main className="max-w-6xl mx-auto px-6 py-8 space-y-10">
 
-        {/* SECTION 1 : Résumé des résultats */}
+        {/* Résumé des résultats */}
         <section>
-          <h2 className="text-2xl font-bold mb-4" style={{ color: '#333333' }}>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">
             Résumé des résultats
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-
-            <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-              <p className="text-sm mb-1" style={{ color: '#888888' }}>Abonnés Urtam</p>
-              <p className="text-4xl font-bold" style={{ color: '#2E5A8B' }}><CountUp end={400} /></p>
+            <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
+              <p className="text-xs text-gray-900 font-medium leading-tight">Abonnés Urtam</p>
+              <p className="text-3xl font-semibold mt-2" style={{ color: '#032b77' }}><CountUp end={data.resume.abonnes} /></p>
             </div>
-
-            <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-              <p className="text-sm mb-1" style={{ color: '#888888' }}>Nombre de posts publiés</p>
-              <p className="text-4xl font-bold" style={{ color: '#2E5A8B' }}><CountUp end={36} /></p>
+            <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
+              <p className="text-xs text-gray-900 font-medium leading-tight">Nombre de posts publiés</p>
+              <p className="text-3xl font-semibold mt-2" style={{ color: '#032b77' }}><CountUp end={data.resume.posts} /></p>
             </div>
-
-            <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-              <p className="text-sm mb-1" style={{ color: '#888888' }}>Taux d'engagement</p>
-              <p className="text-4xl font-bold" style={{ color: '#2E5A8B' }}><CountUp end={4.0} decimals={1} suffix="%" /></p>
+            <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
+              <p className="text-xs text-gray-900 font-medium leading-tight">Taux d&apos;engagement</p>
+              <p className="text-3xl font-semibold mt-2" style={{ color: '#032b77' }}><CountUp end={data.resume.engagement} decimals={1} suffix="%" /></p>
             </div>
-
-            <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-              <p className="text-sm mb-1" style={{ color: '#888888' }}>Objectif abonnés</p>
-              <p className="text-4xl font-bold" style={{ color: '#2E5A8B' }}><CountUp end={1000} /></p>
+            <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
+              <p className="text-xs text-gray-900 font-medium leading-tight">Objectif abonnés</p>
+              <p className="text-3xl font-semibold mt-2" style={{ color: '#032b77' }}><CountUp end={data.resume.objectifAbonnes} /></p>
             </div>
-
           </div>
         </section>
 
-        {/* SECTION : Evolution des KPIs */}
+        {/* Evolution des KPIs */}
         <section>
-          <h2 className="text-2xl font-bold mb-4" style={{ color: '#333333' }}>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">
             Evolution des KPIs
           </h2>
-          <div className="bg-white overflow-hidden" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-            <div className="overflow-x-auto">
-              <table className="min-w-full">
-                <thead style={{ backgroundColor: '#F5F5F5' }}>
-                  <tr>
-                    <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style={{ color: '#888888' }}>
-                      KPI
-                    </th>
-                    <th className="px-6 py-3 text-center text-sm font-medium uppercase tracking-wider" style={{ color: '#888888' }}>
-                      Résultats obtenus
-                    </th>
+          <div className="bg-white rounded-xl shadow-md overflow-hidden">
+            <table className="min-w-full">
+              <thead>
+                <tr className="border-b border-gray-100">
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-500">
+                    KPI
+                  </th>
+                  <th className="px-6 py-4 text-center text-sm font-semibold text-gray-500">
+                    Résultats obtenus
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.kpiResultats.map((row, index) => (
+                  <tr key={index} className={index < data.kpiResultats.length - 1 ? 'border-b border-gray-50' : ''}>
+                    <td className="px-6 py-4 text-sm text-gray-900">{row.kpi}</td>
+                    <td className="px-6 py-4 text-center text-lg font-semibold" style={{ color: '#032b77' }}>{row.valeur}</td>
                   </tr>
-                </thead>
-                <tbody className="bg-white divide-y" style={{ borderColor: '#E0E0E0' }}>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-base font-medium" style={{ color: '#333333' }}>
-                      Abonnés LinkedIn Urtam
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-center text-2xl font-bold" style={{ color: '#2E5A8B' }}>
-                      400
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-base font-medium" style={{ color: '#333333' }}>
-                      Posts publiés / mois
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-center text-2xl font-bold" style={{ color: '#2E5A8B' }}>
-                      2 - 9
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-base font-medium" style={{ color: '#333333' }}>
-                      Taux d'engagement
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-center text-2xl font-bold" style={{ color: '#2E5A8B' }}>
-                      4%
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-base font-medium" style={{ color: '#333333' }}>
-                      Demandes mentionnant Urtam
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-center text-2xl font-bold" style={{ color: '#2E5A8B' }}>
-                      20%
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         </section>
 
-        {/* SECTION 2 : Graphiques d'évolution */}
+        {/* Évolution sur 6 mois */}
         <section>
-          <h2 className="text-2xl font-bold mb-4" style={{ color: '#333333' }}>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">
             Évolution sur 6 mois
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Graphique 1 : Évolution des abonnés */}
-            <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#333333' }}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            {/* Graphique abonnés */}
+            <div className="bg-white rounded-xl shadow-md p-6">
+              <h3 className="text-base font-medium text-gray-900 mb-6">
                 Évolution des abonnés Urtam
               </h3>
-              <ResponsiveContainer width="100%" height={350}>
-                <LineChart data={chartDataFollowers} margin={{ top: 20, right: 20, left: 20, bottom: 60 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
+              <ResponsiveContainer width="100%" height={280}>
+                <LineChart data={chartDataFollowers} margin={{ top: 10, right: 10, left: 10, bottom: 40 }}>
+                  <CartesianGrid stroke="#E5E7EB" strokeDasharray="0" />
                   <XAxis
                     dataKey="mois"
-                    tick={{ fill: '#888888', fontSize: 13 }}
-                    label={{ value: 'Mois', position: 'bottom', offset: 15, style: { fontSize: 14, fontWeight: 500, fill: '#888888' } }}
+                    tick={{ fill: '#9CA3AF', fontSize: 12, dy: 10 }}
+                    axisLine={{ stroke: '#D1D5DB' }}
+                    tickLine={false}
+                    label={{ value: 'Mois', position: 'bottom', offset: 10, style: { fontSize: 12, fill: '#9CA3AF' } }}
                   />
                   <YAxis
-                    tick={{ fill: '#888888', fontSize: 13 }}
-                    width={50}
-                    label={{ value: 'Nombre d\'abonnés', angle: -90, position: 'outside', dx: -30, style: { fontSize: 14, fontWeight: 500, fill: '#888888', textAnchor: 'middle' } }}
+                    tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                    axisLine={false}
+                    tickLine={false}
+                    width={40}
+                    label={{ value: "Nombre d'abonnés", angle: -90, position: 'outside', dx: -25, style: { fontSize: 12, fill: '#9CA3AF', textAnchor: 'middle' } }}
                   />
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#fff', border: '1px solid #E0E0E0', borderRadius: '8px' }}
+                    contentStyle={{ backgroundColor: '#fff', border: '1px solid #E5E7EB', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', fontSize: 13 }}
                   />
                   <Line
                     type="monotone"
                     dataKey="abonnes"
-                    stroke="#5B9BD5"
-                    strokeWidth={2}
-                    dot={{ fill: '#5B9BD5', r: 4 }}
+                    stroke="#032b77"
+                    strokeWidth={2.5}
+                    dot={{ fill: '#032b77', r: 4, strokeWidth: 0 }}
                   />
                 </LineChart>
               </ResponsiveContainer>
             </div>
 
-            {/* Graphique 2 : Taux d'engagement par mois */}
-            <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#333333' }}>
-                Taux d'engagement par mois
+            {/* Graphique engagement */}
+            <div className="bg-white rounded-xl shadow-md p-6">
+              <h3 className="text-base font-medium text-gray-900 mb-6">
+                Taux d&apos;engagement par mois
               </h3>
-              <ResponsiveContainer width="100%" height={350}>
-                <LineChart data={chartDataEngagement} margin={{ top: 20, right: 20, left: 20, bottom: 60 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
+              <ResponsiveContainer width="100%" height={280}>
+                <LineChart data={chartDataEngagement} margin={{ top: 10, right: 10, left: 10, bottom: 40 }}>
+                  <CartesianGrid stroke="#E5E7EB" strokeDasharray="0" />
                   <XAxis
                     dataKey="mois"
-                    tick={{ fill: '#888888', fontSize: 13 }}
-                    label={{ value: 'Mois', position: 'bottom', offset: 15, style: { fontSize: 14, fontWeight: 500, fill: '#888888' } }}
+                    tick={{ fill: '#9CA3AF', fontSize: 12, dy: 10 }}
+                    axisLine={{ stroke: '#D1D5DB' }}
+                    tickLine={false}
+                    label={{ value: 'Mois', position: 'bottom', offset: 10, style: { fontSize: 12, fill: '#9CA3AF' } }}
                   />
                   <YAxis
-                    tick={{ fill: '#888888', fontSize: 13 }}
-                    width={50}
-                    label={{ value: 'Taux d\'engagement (%)', angle: -90, position: 'outside', dx: -30, style: { fontSize: 14, fontWeight: 500, fill: '#888888', textAnchor: 'middle' } }}
+                    tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                    axisLine={false}
+                    tickLine={false}
+                    width={40}
+                    label={{ value: "Taux d'engagement (%)", angle: -90, position: 'outside', dx: -25, style: { fontSize: 12, fill: '#9CA3AF', textAnchor: 'middle' } }}
                   />
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#fff', border: '1px solid #E0E0E0', borderRadius: '8px' }}
+                    contentStyle={{ backgroundColor: '#fff', border: '1px solid #E5E7EB', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', fontSize: 13 }}
                     formatter={(value: number) => [`${value}%`, 'Engagement']}
                   />
                   <Line
                     type="monotone"
                     dataKey="engagement"
-                    stroke="#5B9BD5"
-                    strokeWidth={2}
-                    dot={{ fill: '#5B9BD5', r: 4 }}
+                    stroke="#032b77"
+                    strokeWidth={2.5}
+                    dot={{ fill: '#032b77', r: 4, strokeWidth: 0 }}
                   />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </div>
-        </section>
 
-        {/* SECTION 3 : Tableau récapitulatif */}
-        <section>
-          <h2 className="text-2xl font-bold mb-4" style={{ color: '#333333' }}>
-            Tableau récapitulatif
-          </h2>
-          <div className="bg-white overflow-hidden" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-            <div className="overflow-x-auto">
-              <table className="min-w-full">
-                <thead style={{ backgroundColor: '#F5F5F5' }}>
-                  <tr>
-                    <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style={{ color: '#888888' }}>
-                      Métrique
+          {/* Tableau récapitulatif */}
+          <div className="bg-white rounded-xl shadow-md overflow-hidden">
+            <table className="min-w-full">
+              <thead>
+                <tr className="border-b border-gray-100">
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-500">
+                    Métrique
+                  </th>
+                  {data.simulationMensuelle.mois.map((mois, index) => (
+                    <th
+                      key={index}
+                      className="px-6 py-4 text-center text-sm font-semibold text-gray-500"
+                    >
+                      {mois}
                     </th>
-                    {simulationData.mois.map((mois, index) => (
-                      <th
-                        key={index}
-                        className="px-6 py-3 text-center text-sm font-medium uppercase tracking-wider"
-                        style={{ color: '#888888' }}
-                      >
-                        {mois}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y" style={{ borderColor: '#E0E0E0' }}>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-base font-medium" style={{ color: '#333333' }}>
-                      Nombre d'abonnés
-                    </td>
-                    {simulationData.abonnes.map((val, index) => (
-                      <td
-                        key={index}
-                        className="px-6 py-4 whitespace-nowrap text-center text-base"
-                        style={{ color: '#333333' }}
-                      >
-                        {val}
-                      </td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-base font-medium" style={{ color: '#333333' }}>
-                      Nombre de posts publiés
-                    </td>
-                    {simulationData.posts.map((val, index) => (
-                      <td
-                        key={index}
-                        className="px-6 py-4 whitespace-nowrap text-center text-base"
-                        style={{ color: '#333333' }}
-                      >
-                        {val}
-                      </td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-base font-medium" style={{ color: '#333333' }}>
-                      Taux engagement (en %)
-                    </td>
-                    {simulationData.engagement.map((val, index) => (
-                      <td
-                        key={index}
-                        className="px-6 py-4 whitespace-nowrap text-center text-base"
-                        style={{ color: '#333333' }}
-                      >
-                        {val}%
-                      </td>
-                    ))}
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-gray-50">
+                  <td className="px-6 py-4 text-sm text-gray-900">Nombre d&apos;abonnés</td>
+                  {data.simulationMensuelle.abonnes.map((val, index) => (
+                    <td key={index} className="px-6 py-4 text-center text-sm text-gray-900">{val}</td>
+                  ))}
+                </tr>
+                <tr className="border-b border-gray-50">
+                  <td className="px-6 py-4 text-sm text-gray-900">Nombre de posts publiés</td>
+                  {data.simulationMensuelle.posts.map((val, index) => (
+                    <td key={index} className="px-6 py-4 text-center text-sm text-gray-900">{val}</td>
+                  ))}
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 text-sm text-gray-900">Taux engagement (en %)</td>
+                  {data.simulationMensuelle.engagement.map((val, index) => (
+                    <td key={index} className="px-6 py-4 text-center text-sm text-gray-900">{val}%</td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
-        {/* SECTION 4 : Insights */}
+        {/* Insights */}
         <section>
-          <h2 className="text-2xl font-bold mb-4" style={{ color: '#333333' }}>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">
             Insights
           </h2>
-
-          <div className="flex flex-col gap-4">
-            {/* Card 1 */}
-            <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-              <p className="text-base" style={{ color: '#333333', lineHeight: '1.6' }}>
-                La régularité des posts a créé une communauté engagée autour de la marque.
-              </p>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-white p-6" style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-              <p className="text-base" style={{ color: '#333333', lineHeight: '1.6' }}>
-                Le taux d'engagement autour des 4% montre que l'audience suit Urtam, pas seulement Stéphane Michel.
-              </p>
-            </div>
+          <div className="space-y-3">
+            {data.insights.map((insight, index) => (
+              <div key={index} className="bg-white rounded-xl shadow-md p-6">
+                <p className="text-sm text-gray-900 leading-relaxed">{insight}</p>
+              </div>
+            ))}
           </div>
         </section>
 
       </main>
+
+      {/* Footer */}
+      <footer className="max-w-6xl mx-auto px-6 py-8">
+        <p className="text-xs text-gray-400 text-center">© 2026 Urtam Formation</p>
+      </footer>
     </div>
   );
 }
