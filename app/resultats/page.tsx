@@ -1,49 +1,12 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import CountUp from '@/components/CountUp';
-import ShareMenu from '@/components/ShareMenu';
-
-interface ProjectionsData {
-  resume: {
-    abonnes: number;
-    posts: number;
-    engagement: number;
-    objectifAbonnes: number;
-  };
-  kpiResultats: { kpi: string; valeur: string }[];
-  simulationMensuelle: {
-    mois: string[];
-    abonnes: number[];
-    posts: number[];
-    engagement: number[];
-  };
-  insights: string[];
-}
+import dashboardData from '@/lib/data/dashboard-data.json';
 
 export default function ResultatsPage() {
-  const [data, setData] = useState<ProjectionsData | null>(null);
-  const dashboardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    fetch('/data/dashboard-data.json')
-      .then(res => res.json())
-      .then(json => setData(json.projections))
-      .catch(err => console.error('Erreur chargement données:', err));
-  }, []);
-
-  if (!data) {
-    return (
-      <div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: '#F5F5F5' }}>
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-2 border-gray-300 mx-auto" style={{ borderTopColor: '#032b77' }}></div>
-          <p className="mt-4 text-sm text-gray-500">Chargement des données...</p>
-        </div>
-      </div>
-    );
-  }
+  const data = dashboardData.projections;
 
   const chartDataFollowers = data.simulationMensuelle.mois.map((mois, index) => ({
     mois,
@@ -56,14 +19,13 @@ export default function ResultatsPage() {
   }));
 
   return (
-    <div ref={dashboardRef} className="min-h-screen" style={{ backgroundColor: '#F5F5F5' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#F5F5F5' }}>
       {/* Header */}
       <header className="bg-white shadow-md">
         <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
-          <h1 className="text-3xl font-semibold tracking-tight" style={{ color: '#032b77' }}>
+          <h1 className="text-3xl font-semibold tracking-tight text-urtam" style={{ color: '#032b77' }}>
             Simulation <span className="font-light text-gray-300 mx-1">|</span> Résultats 6 mois
           </h1>
-          <ShareMenu targetRef={dashboardRef} filePrefix="urtam-projections" pageTitle="Simulation - Projections 2026" />
         </div>
       </header>
 
@@ -78,8 +40,8 @@ export default function ResultatsPage() {
           </Link>
           <Link
             href="/resultats"
-            className="px-6 py-2.5 rounded-full text-sm font-medium border-2 transition-colors"
-            style={{ borderColor: '#032b77', color: '#032b77', backgroundColor: 'transparent' }}
+            className="px-6 py-2.5 rounded-full text-sm font-medium border-2 border-urtam text-urtam transition-colors"
+            style={{ borderColor: '#032b77', color: '#032b77' }}
           >
             Projections 2026
           </Link>
@@ -96,19 +58,19 @@ export default function ResultatsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <p className="text-xs text-gray-900 font-medium leading-tight">Abonnés Urtam</p>
-              <p className="text-3xl font-semibold mt-2" style={{ color: '#032b77' }}><CountUp end={data.resume.abonnes} /></p>
+              <p className="text-3xl font-semibold mt-2 text-urtam" style={{ color: '#032b77' }}><CountUp end={data.resume.abonnes} /></p>
             </div>
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <p className="text-xs text-gray-900 font-medium leading-tight">Nombre de posts publiés</p>
-              <p className="text-3xl font-semibold mt-2" style={{ color: '#032b77' }}><CountUp end={data.resume.posts} /></p>
+              <p className="text-3xl font-semibold mt-2 text-urtam" style={{ color: '#032b77' }}><CountUp end={data.resume.posts} /></p>
             </div>
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <p className="text-xs text-gray-900 font-medium leading-tight">Taux d&apos;engagement</p>
-              <p className="text-3xl font-semibold mt-2" style={{ color: '#032b77' }}><CountUp end={data.resume.engagement} decimals={1} suffix="%" /></p>
+              <p className="text-3xl font-semibold mt-2 text-urtam" style={{ color: '#032b77' }}><CountUp end={data.resume.engagement} decimals={1} suffix="%" /></p>
             </div>
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <p className="text-xs text-gray-900 font-medium leading-tight">Objectif abonnés</p>
-              <p className="text-3xl font-semibold mt-2" style={{ color: '#032b77' }}><CountUp end={data.resume.objectifAbonnes} /></p>
+              <p className="text-3xl font-semibold mt-2 text-urtam" style={{ color: '#032b77' }}><CountUp end={data.resume.objectifAbonnes} /></p>
             </div>
           </div>
         </section>
@@ -134,7 +96,7 @@ export default function ResultatsPage() {
                 {data.kpiResultats.map((row, index) => (
                   <tr key={index} className={index < data.kpiResultats.length - 1 ? 'border-b border-gray-50' : ''}>
                     <td className="px-6 py-4 text-sm text-gray-900">{row.kpi}</td>
-                    <td className="px-6 py-4 text-center text-lg font-semibold" style={{ color: '#032b77' }}>{row.valeur}</td>
+                    <td className="px-6 py-4 text-center text-lg font-semibold text-urtam" style={{ color: '#032b77' }}>{row.valeur}</td>
                   </tr>
                 ))}
               </tbody>
@@ -223,42 +185,52 @@ export default function ResultatsPage() {
             </div>
           </div>
 
-          {/* Tableau récapitulatif */}
+          {/* Tableau seuils critiques & actions */}
           <div className="bg-white rounded-xl shadow-md overflow-hidden">
             <table className="min-w-full">
               <thead>
                 <tr className="border-b border-gray-100">
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-500">
+                  <th className="px-6 py-5 text-left text-sm font-semibold text-gray-500">
                     Métrique
                   </th>
-                  {data.simulationMensuelle.mois.map((mois, index) => (
-                    <th
-                      key={index}
-                      className="px-6 py-4 text-center text-sm font-semibold text-gray-500"
-                    >
-                      {mois}
-                    </th>
-                  ))}
+                  <th className="px-6 py-5 text-center text-sm font-semibold text-gray-500">
+                    Seuil critique
+                  </th>
+                  <th className="px-6 py-5 text-left text-sm font-semibold text-gray-500">
+                    Actions recommandées
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="border-b border-gray-50">
-                  <td className="px-6 py-4 text-sm text-gray-900">Nombre d&apos;abonnés</td>
-                  {data.simulationMensuelle.abonnes.map((val, index) => (
-                    <td key={index} className="px-6 py-4 text-center text-sm text-gray-900">{val}</td>
-                  ))}
+                  <td className="px-6 py-6 text-sm text-gray-900">Nombre d&apos;abonnés</td>
+                  <td className="px-6 py-6 text-center text-sm font-medium text-gray-900">&lt; 50 / mois</td>
+                  <td className="px-6 py-6 text-sm text-gray-700">
+                    <ul className="list-disc list-inside space-y-2">
+                      <li>Mentionner @Urtam Formation dans chaque post du compte personnel de Stéphane Michel</li>
+                      <li>Commenter les publications des DRH et responsables formation depuis le compte Urtam</li>
+                    </ul>
+                  </td>
                 </tr>
                 <tr className="border-b border-gray-50">
-                  <td className="px-6 py-4 text-sm text-gray-900">Nombre de posts publiés</td>
-                  {data.simulationMensuelle.posts.map((val, index) => (
-                    <td key={index} className="px-6 py-4 text-center text-sm text-gray-900">{val}</td>
-                  ))}
+                  <td className="px-6 py-6 text-sm text-gray-900">Nombre de posts publiés</td>
+                  <td className="px-6 py-6 text-center text-sm font-medium text-gray-900">&lt; 4 / mois</td>
+                  <td className="px-6 py-6 text-sm text-gray-700">
+                    <ul className="list-disc list-inside space-y-2">
+                      <li>Publier un retour client après chaque session de formation</li>
+                      <li>Filmer 30s en fin de session pour créer un post vidéo</li>
+                    </ul>
+                  </td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 text-sm text-gray-900">Taux engagement (en %)</td>
-                  {data.simulationMensuelle.engagement.map((val, index) => (
-                    <td key={index} className="px-6 py-4 text-center text-sm text-gray-900">{val}%</td>
-                  ))}
+                  <td className="px-6 py-6 text-sm text-gray-900">Taux engagement (en %)</td>
+                  <td className="px-6 py-6 text-center text-sm font-medium text-gray-900">&lt; 1.5%</td>
+                  <td className="px-6 py-6 text-sm text-gray-700">
+                    <ul className="list-disc list-inside space-y-2">
+                      <li>Poser une question à la fin de chaque post</li>
+                      <li>Répondre à chaque commentaire</li>
+                    </ul>
+                  </td>
                 </tr>
               </tbody>
             </table>

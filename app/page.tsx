@@ -1,59 +1,12 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import CountUp from '@/components/CountUp';
-import ShareMenu from '@/components/ShareMenu';
-
-interface DashboardData {
-  urtam: {
-    linkedinFollowers: number;
-    linkedinPosts: number;
-    engagementRate: number;
-  };
-  stephaneMichel: {
-    linkedinFollowers: number;
-  };
-  leader: {
-    name: string;
-    linkedinFollowers: number;
-  };
-  objectifs: {
-    followersM6: number;
-    postsParMois: number;
-    engagementCible: number;
-    contactsUrtam: number;
-  };
-  suiviMensuel: {
-    mois: string[];
-    abonnes: (number | null)[];
-    posts: (number | null)[];
-    engagement: (number | null)[];
-  };
-}
+import dashboardData from '@/lib/data/dashboard-data.json';
 
 export default function HomePage() {
-  const [data, setData] = useState<DashboardData | null>(null);
-  const dashboardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    fetch('/data/dashboard-data.json')
-      .then(res => res.json())
-      .then(data => setData(data))
-      .catch(err => console.error('Erreur chargement données:', err));
-  }, []);
-
-  if (!data) {
-    return (
-      <div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: '#F5F5F5' }}>
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-2 border-gray-300 mx-auto" style={{ borderTopColor: '#032b77' }}></div>
-          <p className="mt-4 text-sm text-gray-500">Chargement des données...</p>
-        </div>
-      </div>
-    );
-  }
+  const data = dashboardData;
 
   const chartDataFollowers = data.suiviMensuel.mois.map((mois, index) => ({
     mois,
@@ -66,14 +19,13 @@ export default function HomePage() {
   }));
 
   return (
-    <div ref={dashboardRef} className="min-h-screen" style={{ backgroundColor: '#F5F5F5' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#F5F5F5' }}>
       {/* Header */}
       <header className="bg-white shadow-md">
         <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
-          <h1 className="text-3xl font-semibold tracking-tight" style={{ color: '#032b77' }}>
+          <h1 className="text-3xl font-semibold tracking-tight text-urtam" style={{ color: '#032b77' }}>
             Tableau de bord <span className="font-light text-gray-300 mx-1">|</span> Urtam Formation
           </h1>
-          <ShareMenu targetRef={dashboardRef} filePrefix="urtam-objectifs" pageTitle="Tableau de bord - Objectifs 2026" />
         </div>
       </header>
 
@@ -82,8 +34,8 @@ export default function HomePage() {
         <div className="flex gap-3">
           <Link
             href="/"
-            className="px-6 py-2.5 rounded-full text-sm font-medium border-2 transition-colors"
-            style={{ borderColor: '#032b77', color: '#032b77', backgroundColor: 'transparent' }}
+            className="px-6 py-2.5 rounded-full text-sm font-medium border-2 border-urtam text-urtam transition-colors"
+            style={{ borderColor: '#032b77', color: '#032b77' }}
           >
             Objectifs 2026
           </Link>
@@ -106,19 +58,19 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <p className="text-xs text-gray-900 font-medium leading-tight">Abonnés LinkedIn Urtam</p>
-              <p className="text-3xl font-semibold mt-2" style={{ color: '#032b77' }}><CountUp end={data.urtam.linkedinFollowers} /></p>
+              <p className="text-3xl font-semibold mt-2 text-urtam" style={{ color: '#032b77' }}><CountUp end={data.urtam.linkedinFollowers} /></p>
             </div>
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <p className="text-xs text-gray-900 font-medium leading-tight">Abonnés LinkedIn Stéphane Michel</p>
-              <p className="text-3xl font-semibold mt-2" style={{ color: '#032b77' }}><CountUp end={data.stephaneMichel.linkedinFollowers} /></p>
+              <p className="text-3xl font-semibold mt-2 text-urtam" style={{ color: '#032b77' }}><CountUp end={data.stephaneMichel.linkedinFollowers} /></p>
             </div>
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <p className="text-xs text-gray-900 font-medium leading-tight">Dernier post Stéphane Michel</p>
-              <p className="text-3xl font-semibold mt-2" style={{ color: '#032b77' }}>1 an</p>
+              <p className="text-3xl font-semibold mt-2 text-urtam" style={{ color: '#032b77' }}>1 an</p>
             </div>
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <p className="text-xs text-gray-900 font-medium leading-tight">Témoignages clients</p>
-              <p className="text-3xl font-semibold mt-2" style={{ color: '#032b77' }}>2</p>
+              <p className="text-3xl font-semibold mt-2 text-urtam" style={{ color: '#032b77' }}>2</p>
             </div>
           </div>
         </section>
@@ -146,23 +98,23 @@ export default function HomePage() {
               <tbody>
                 <tr className="border-b border-gray-50">
                   <td className="px-6 py-4 text-sm text-gray-900">Abonnés LinkedIn Urtam</td>
-                  <td className="px-6 py-4 text-center text-lg font-semibold" style={{ color: '#032b77' }}>{data.urtam.linkedinFollowers}</td>
-                  <td className="px-6 py-4 text-center text-lg font-semibold" style={{ color: '#032b77' }}>{data.objectifs.followersM6}</td>
+                  <td className="px-6 py-4 text-center text-lg font-semibold text-urtam" style={{ color: '#032b77' }}>{data.urtam.linkedinFollowers}</td>
+                  <td className="px-6 py-4 text-center text-lg font-semibold text-urtam" style={{ color: '#032b77' }}>{data.objectifs.followersM6}</td>
                 </tr>
                 <tr className="border-b border-gray-50">
                   <td className="px-6 py-4 text-sm text-gray-900">Posts publiés / mois</td>
-                  <td className="px-6 py-4 text-center text-lg font-semibold" style={{ color: '#032b77' }}>{data.urtam.linkedinPosts}</td>
-                  <td className="px-6 py-4 text-center text-lg font-semibold" style={{ color: '#032b77' }}>{data.objectifs.postsParMois}</td>
+                  <td className="px-6 py-4 text-center text-lg font-semibold text-urtam" style={{ color: '#032b77' }}>{data.urtam.linkedinPosts}</td>
+                  <td className="px-6 py-4 text-center text-lg font-semibold text-urtam" style={{ color: '#032b77' }}>{data.objectifs.postsParMois}</td>
                 </tr>
                 <tr className="border-b border-gray-50">
                   <td className="px-6 py-4 text-sm text-gray-900">Taux d&apos;engagement</td>
-                  <td className="px-6 py-4 text-center text-lg font-semibold" style={{ color: '#032b77' }}>{data.urtam.engagementRate}%</td>
-                  <td className="px-6 py-4 text-center text-lg font-semibold" style={{ color: '#032b77' }}>{data.objectifs.engagementCible}%</td>
+                  <td className="px-6 py-4 text-center text-lg font-semibold text-urtam" style={{ color: '#032b77' }}>{data.urtam.engagementRate}%</td>
+                  <td className="px-6 py-4 text-center text-lg font-semibold text-urtam" style={{ color: '#032b77' }}>{data.objectifs.engagementCible}%</td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4 text-sm text-gray-900">Demandes mentionnant Urtam</td>
-                  <td className="px-6 py-4 text-center text-lg font-semibold" style={{ color: '#032b77' }}>0%</td>
-                  <td className="px-6 py-4 text-center text-lg font-semibold" style={{ color: '#032b77' }}>{data.objectifs.contactsUrtam}%</td>
+                  <td className="px-6 py-4 text-center text-lg font-semibold text-urtam" style={{ color: '#032b77' }}>0%</td>
+                  <td className="px-6 py-4 text-center text-lg font-semibold text-urtam" style={{ color: '#032b77' }}>{data.objectifs.contactsUrtam}%</td>
                 </tr>
               </tbody>
             </table>
@@ -251,48 +203,52 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Tableau récapitulatif */}
+          {/* Tableau seuils critiques & actions */}
           <div className="bg-white rounded-xl shadow-md overflow-hidden">
             <table className="min-w-full">
               <thead>
                 <tr className="border-b border-gray-100">
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-500">
+                  <th className="px-6 py-5 text-left text-sm font-semibold text-gray-500">
                     Métrique
                   </th>
-                  {data.suiviMensuel.mois.map((mois, index) => (
-                    <th
-                      key={index}
-                      className="px-6 py-4 text-center text-sm font-semibold text-gray-500"
-                    >
-                      {mois}
-                    </th>
-                  ))}
+                  <th className="px-6 py-5 text-center text-sm font-semibold text-gray-500">
+                    Seuil critique
+                  </th>
+                  <th className="px-6 py-5 text-left text-sm font-semibold text-gray-500">
+                    Actions recommandées
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="border-b border-gray-50">
-                  <td className="px-6 py-4 text-sm text-gray-900">Nombre d&apos;abonnés</td>
-                  {data.suiviMensuel.abonnes.map((val, index) => (
-                    <td key={index} className={`px-6 py-4 text-center text-sm ${val !== null ? 'text-gray-900' : 'text-gray-300'}`}>
-                      {val !== null ? val : '—'}
-                    </td>
-                  ))}
+                  <td className="px-6 py-6 text-sm text-gray-900">Nombre d&apos;abonnés</td>
+                  <td className="px-6 py-6 text-center text-sm font-medium text-gray-900">&lt; 50 / mois</td>
+                  <td className="px-6 py-6 text-sm text-gray-700">
+                    <ul className="list-disc list-inside space-y-2">
+                      <li>Mentionner @Urtam Formation dans chaque post du compte personnel de Stéphane Michel</li>
+                      <li>Commenter les publications des DRH et responsables formation depuis le compte Urtam</li>
+                    </ul>
+                  </td>
                 </tr>
                 <tr className="border-b border-gray-50">
-                  <td className="px-6 py-4 text-sm text-gray-900">Nombre de posts publiés</td>
-                  {data.suiviMensuel.posts.map((val, index) => (
-                    <td key={index} className={`px-6 py-4 text-center text-sm ${val !== null ? 'text-gray-900' : 'text-gray-300'}`}>
-                      {val !== null ? val : '—'}
-                    </td>
-                  ))}
+                  <td className="px-6 py-6 text-sm text-gray-900">Nombre de posts publiés</td>
+                  <td className="px-6 py-6 text-center text-sm font-medium text-gray-900">&lt; 4 / mois</td>
+                  <td className="px-6 py-6 text-sm text-gray-700">
+                    <ul className="list-disc list-inside space-y-2">
+                      <li>Publier un retour client après chaque session de formation</li>
+                      <li>Filmer 30s en fin de session pour créer un post vidéo</li>
+                    </ul>
+                  </td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 text-sm text-gray-900">Taux engagement (en %)</td>
-                  {data.suiviMensuel.engagement.map((val, index) => (
-                    <td key={index} className={`px-6 py-4 text-center text-sm ${val !== null ? 'text-gray-900' : 'text-gray-300'}`}>
-                      {val !== null ? `${val}%` : '—'}
-                    </td>
-                  ))}
+                  <td className="px-6 py-6 text-sm text-gray-900">Taux engagement (en %)</td>
+                  <td className="px-6 py-6 text-center text-sm font-medium text-gray-900">&lt; 1.5%</td>
+                  <td className="px-6 py-6 text-sm text-gray-700">
+                    <ul className="list-disc list-inside space-y-2">
+                      <li>Poser une question à la fin de chaque post</li>
+                      <li>Répondre à chaque commentaire</li>
+                    </ul>
+                  </td>
                 </tr>
               </tbody>
             </table>

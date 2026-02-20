@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        urtam: '#032b77',
         primary: {
           DEFAULT: '#22c9b0',
           dark: '#1ba896',
