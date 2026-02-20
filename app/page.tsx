@@ -1,12 +1,36 @@
 'use client';
 
+import { useRef, useCallback, useState } from 'react';
 import Link from 'next/link';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Download, Loader2 } from 'lucide-react';
+import { toPng } from 'html-to-image';
 import CountUp from '@/components/CountUp';
 import dashboardData from '@/lib/data/dashboard-data.json';
 
 export default function HomePage() {
   const data = dashboardData;
+  const dashboardRef = useRef<HTMLDivElement>(null);
+  const [capturing, setCapturing] = useState(false);
+
+  const handleDownload = useCallback(async () => {
+    if (!dashboardRef.current) return;
+    setCapturing(true);
+    try {
+      const dataUrl = await toPng(dashboardRef.current, {
+        backgroundColor: '#F5F5F5',
+        pixelRatio: 2,
+      });
+      const link = document.createElement('a');
+      link.download = 'dashboard-objectifs-2026.png';
+      link.href = dataUrl;
+      link.click();
+    } catch (err) {
+      console.error('Erreur capture:', err);
+    } finally {
+      setCapturing(false);
+    }
+  }, []);
 
   const chartDataFollowers = data.suiviMensuel.mois.map((mois, index) => ({
     mois,
@@ -19,13 +43,25 @@ export default function HomePage() {
   }));
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F5F5F5' }}>
+    <div ref={dashboardRef} className="min-h-screen" style={{ backgroundColor: '#F5F5F5' }}>
       {/* Header */}
       <header className="bg-white shadow-md">
         <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
           <h1 className="text-3xl font-semibold tracking-tight text-urtam" style={{ color: '#032b77' }}>
             Tableau de bord <span className="font-light text-gray-300 mx-1">|</span> Urtam Formation
           </h1>
+          <button
+            onClick={handleDownload}
+            disabled={capturing}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors disabled:opacity-50"
+          >
+            {capturing ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <Download className="w-4 h-4" />
+            )}
+            {capturing ? 'Capture...' : 'Télécharger'}
+          </button>
         </div>
       </header>
 
